@@ -1,0 +1,41 @@
+<html    xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <title>Gestion des employés</title>
+</head>
+<body>
+<div th:insert="./navbar">  </div>
+<div class="container">
+    <div class="row">
+        <h1>Gestion des employés</h1>
+        <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+        <a th:href="@{/entreprises/{id}/employees/new(id=${entreprise.id})}" class="btn btn-primary">Nouvel employé</a>
+
+
+        <table class="table table-striped table-bordered my-4">
+            <thead>
+            <tr>
+                <th>Id</th><th>Nom</th><th>Prenom</th><th>Email</th><th>Adresse</th><th>Salaire</th>
+            </tr>
+            </thead>
+
+            <tr th:each="employee:${employees}">
+                <td th:text="${employee.id}"/>
+                <td th:text="${employee.nom}"/>
+                <td th:text="${employee.prenom}"/>
+                <td th:text="${employee.email}"/>
+                <td th:text="${employee.adresse}"/>
+                <td th:text="${employee.salaire}"/>
+                <td><a th:href="@{/entreprises/{ident}/employees/edit/{id}(id=${employee.id} , ident=${entreprise.id})}" class="btn btn-primary">Modifier</a> <a th:href="@{/entreprises/{ident}/employees/delete/{id}(id=${employee.id}, ident=${entreprise.id})}" class="btn btn-danger">Supprimer</a></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</body>
+</html>
